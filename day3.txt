@@ -1,0 +1,103 @@
+1.start.spring.il->프로젝트 생성
+2.
+3.스프링의 핵심 개념 IoC, DI
+
+객체를 우리가 만드는게 아님 (부트가 알아서 만들어줌)->IoC
+
+스프링에게 객체를 만들어달라고 시키는법
+클래스 앞에 컴포넌트 어노테이션을 붙힘
+@Component public class Car{};
+
+@ComponentScan을 통해서 @Component가 붙어있는 클래스르 전부 
+객체로 만들어서 컨테이너 저장한다.
+
+의존성주입
+객체가 필요한 곳에 직접 넣는게 아니라 컨테이너에 저장해놓은 객체를 주입시키는 것 
+
+1.필드주입(숙달되면 이게편함)
+주입이 필요한 곳에 @Autowired->편한데 순환참조가 일어날수 있다.
+
+2.생성자주입(가장많이씀)
+생성자를 만들고 주입이 필요한 필드를 매개변수로 받아서 주입
+
+3.setter주입
+setter를 통해서 객체를 주입 
+
+@Component
+public class Betterty{->객체 컨테이너에 battery객체가 저장됨 
+   int charge =90;
+}
+@Component
+public class Toy{->객체 컨테이너에 toy 객체가 저장됨
+    @Autowired ->필드주입 (생성자주입할때는 안해도됨)
+    Battery battery; ->배터리 객체가 필요함 
+
+   public Toy(Battery battery){->생성자주입
+          this.Battery = bettery;
+    
+}
+
+Gradle
+자동화 필드툴
+플러그인
+라이브러리 설치 ->어떤 버전의 어떤 라이브러리를 설치하겠다
+Gradle이 저장소로 가서 설치를 해준다. 
+
+프로젝트의 버전관리 
+
+Lombok
+어노테이션으로 코딩에 필요한 코드를 대신 만들어준다. 
+@Getter ->getter메서드 만들어줌
+@Setter ->setter메서드 만들어줌
+@Builder ->빌더패턴 사용할 수 있게 해줌
+@Data->getter/setter,toString,EqualandHashCode메서드 사용가능
+@NoArgsConstructor->기본생성자
+@AllArgsConstructor->모든 필드 매개변수로 갖는 생성자
+@RequiredArgs->nonnull,final
+@ToString->to strting 오버라이딩 
+
+public class User{
+   String name;
+   int age;
+}
+
+User user =User.builder().name("홍길동").age(30).build();
+
+장점
+생성자 오버로딩을 줄일 수 있고 객체를 단계적으로 생성할 수 있다. 
+유연한 객체 생성이 가능
+고드의 가독성 높힘 
+
+싱글톤 패턴
+객체를 한번만 만들어놓고 계속 갖다 쓰겟다
+
+스피링에서 Bean으로 만드는 것들은 다 싱글톤으로 만들어진다.
+메모리에 딱 1번만 올라가게 되고 우리는 만들어진것을 사용한다. 
+
+서비스 개발 실습
+POST로 요청했을 때 CREATE REST API 개발
+GET으로 요청했을 때 RETRIEVE REST API 개발
+UPDATE로 요청했을 때 UPDATE REST API 개발
+DELETE로 요청했을 때 DELETE REST API 개발
+
+영속계층 ->서비스계층->표현계층 순으로 구현
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                      
